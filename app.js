@@ -1,84 +1,29 @@
 
 // Node.js modules
-var express = require('express');
-var app = express();
-var schedule = require('node-schedule');
-var debug = require('debug')('reservoir');
-
-
-// Defined output data
-var outputData;
-
+const express = require('express');
+const app = express();
 
 // Library
-var reservoir = require('./libs/reservoir');
-var reservoir_today = require('./libs/reservoir_today');
+const reservoir = require('./libs/reservoir');
 
-
-// Cron job for update output data
-var updateData = schedule.scheduleJob('*/30 * * * 1-5', function(){
-    reservoir(function (err, reservoirData){
-
-        if (err) {
-            debug('---------------- ERROR ----------------');
-            debug(err.toString());
-            debug('---------------- ERROR ----------------');
-        }
-
-        outputData = reservoirData;
-        debug('---------------- SUCCESS ----------------');
-        debug('UPDATE OUTPUT DATA SUCCESS');
-        debug('---------------- SUCCESS ----------------');
-        return;
-    });
-});
-
-
-// Api router
+// Get today
 app.get('/', function(req, res) {
-
-    if(outputData){
-        return res.jsonp({
-            data: outputData
-        });
-    }
-
-    reservoir(function (err, reservoirData) {
-
-        if (err) {
-            return res.jsonp({
-                err: err.toString()
-            });
-        }
-
-        outputData = reservoirData;
-
-        return res.jsonp({
-            data: outputData
-        });
-    });
-
+  reservoir({}, function (err, reservoirData) {
+    if (err) return res.jsonp({err: err.toString()});
+    return res.jsonp({data: reservoirData});
+  });
 });
 
-app.get('/today', function(req, res) {
-
-    reservoir_today(function (err, reservoirData) {
-
-        if (err) {
-            return res.jsonp({
-                err: err.toString()
-            });
-        }
-
-        return res.jsonp({
-            data: reservoirData
-        });
-    });
-
+// Get a specific day
+app.get('/:year-:month-:day', function(req, res) {
+  reservoir(req.params, function (err, reservoirData) {
+    if (err) return res.jsonp({ err: err.toString() });
+    return res.jsonp({data: reservoirData});
+  });
 });
 
-app.set('port', process.env.PORT || 10080);
+app.set('port', process.env.PORT || 9090);
 
-var server = app.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
+const server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + server.address().port);
 });
