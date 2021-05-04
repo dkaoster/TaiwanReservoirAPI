@@ -4,7 +4,7 @@
 
 # How to use
 
-`npx run taiwan-reservoir-api`
+`npx taiwan-reservoir-api`
 
 ## Clone
 
