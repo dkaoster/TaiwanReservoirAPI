@@ -1,4 +1,4 @@
-# TaiwanReservoirAPI
+# taiwan-reservoir-api
 
 **台灣水庫資訊 API**
 
