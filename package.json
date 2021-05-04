@@ -4,10 +4,10 @@
   "description": "台灣水庫儲存量圖像表",
   "main": "libs/reservoir.js",
   "bin": {
-    "taiwan-reservoir-api": "node app.js"
+    "taiwan-reservoir-api": "./app.js"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "./app.js"
   },
   "repository": {
     "type": "git",

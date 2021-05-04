@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 // Node.js modules
 const express = require('express');
