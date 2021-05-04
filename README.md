@@ -4,6 +4,8 @@
 
 # How to use
 
+`npx run TaiwanReservoirAPI`
+
 ## Clone
 
 **Open your terminal**
