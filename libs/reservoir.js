@@ -18,7 +18,15 @@ module.exports = function (dateObj, callback) {
       const now = spDate && moment(`${dateObj.year}-${dateObj.month}-${dateObj.day}T00:00:00.000`);
       const dateVals = now ? { year: now.year(), month: now.month() + 1, day: now.date() } : {};
 
-      const browser = await puppeteer.launch();
+      let browser
+      try {
+        browser = await puppeteer.launch();
+      } catch (e) {
+        browser = await puppeteer.launch({
+          headless: false,
+          args: ["--no-sandbox", "--disabled-setupid-sandbox"],
+        });
+      }
       const page = await browser.newPage();
       await page.goto(_RESERVOIRGOVURL);
 

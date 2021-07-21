@@ -1,6 +1,6 @@
 {
   "name": "taiwan-reservoir-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "台灣水庫儲存量圖像表",
   "main": "libs/reservoir.js",
   "bin": {
