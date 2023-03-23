@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 const moment = require('moment');
 
-const _RESERVOIRGOVURL = 'http://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx';
+const _RESERVOIRGOVURL = 'https://fhy.wra.gov.tw/ReservoirPage_2011/StorageCapacity.aspx';
 
 module.exports = function (dateObj, callback) {
 
